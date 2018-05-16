@@ -10,6 +10,7 @@ cp "${BASH_SOURCE%/*}/.env.pycharm" $ENVFILE_NAME
 
 # Variables defined in .env can be passed as args to Dockerfile
 echo "UID=$UID" >> "$1/.env"
+echo "COMPOSE_PROJECT_NAME=$COMPOSE_PROJECT_NAME" >> "$1/.env"
 
 # Create directory to keep pycharm configuration
 mkdir -p "~/pycharm-docker/$COMPOSE_PROJECT_NAME/"
