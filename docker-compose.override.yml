@@ -1,0 +1,29 @@
+version: "3.0"
+services:
+  pycharm:
+    build:
+      context: .
+      dockerfile: docker/pycharm/Dockerfile
+      args:
+        username: $USER
+        userid: $UID
+    command: $HOME/pycharm/bin/pycharm.sh
+    user: $USER
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:z
+      - .:/code:z
+      - ~/pycharm-docker/pycharm/pycharm-2018.1.2:$HOME/pycharm:z
+      - ~/pycharm-docker/.cache:$HOME/.cache:z
+      - ~/pycharm-docker/.java:$HOME/.java:z
+      - ~/pycharm-docker/.PyCharm2018.1:$HOME/.PyCharm2018.1:z
+    links:
+      - db
+      - web
+    env_file:
+      - .env.default
+      - .env
+      - .env.pycharm
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10k
