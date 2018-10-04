@@ -5,18 +5,18 @@ services:
       context: .
       dockerfile: docker/pycharm/Dockerfile
       args:
-        username: $USER
+        username: $DEVUSER
         userid: $UID
-    command: $HOME/pycharm/bin/pycharm.sh
-    user: $USER
+    command: /home/$DEVUSER/pycharm/bin/pycharm.sh
+    user: $DEVUSER
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:z
       - .:/code:z
-      - $PYCHARM_DIR:$HOME/pycharm:z
-      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.cache:$HOME/.cache:z
-      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.java:$HOME/.java:z
-      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.PyCharm:$HOME/.PyCharm:z
-      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.PyCharm2018.1:$HOME/.PyCharm2018.1:z
+      - $PYCHARM_DIR:/home/$DEVUSER/pycharm:z
+      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.cache:/home/$DEVUSER/.cache:z
+      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.java:/home/$DEVUSER/.java:z
+      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.PyCharm:/home/$DEVUSER/.PyCharm:z
+      - ~/pycharm-docker/$COMPOSE_PROJECT_NAME/.PyCharm2018.1:/home/$DEVUSER/.PyCharm2018.1:z
     links:
       - db
       - web
